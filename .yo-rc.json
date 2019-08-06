@@ -1,0 +1,47 @@
+{
+  "generator-jhipster": {
+    "applicationType": "microservice",
+    "gitCompany": "",
+    "baseName": "iCow3",
+    "packageName": "greendreams.icow.app",
+    "packageFolder": "greendreams/icow/app",
+    "serverPort": 8383,
+    "serviceDiscoveryType": "eureka",
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": "kafka",
+    "buildTool": "maven",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "6.2.0",
+    "jwtSecretKey": "ZjY1YTNkNTg0NTc3ZDFiZTMzYjI0Y2U1YTkzNzY4ZThmMTA3YTBhNGJiMzIwZjA2NDFjOWIxNDljMmFiNTM3MDc4Y2ZlN2M5YTYzMDA3YjIzMzQ5NTVmNWFkMTdjZmQxYjI0MDQ1YjIzMmIxZGY5MWU2ZmU0YjkzNjAzODQyNGU=",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  },
+  "git-provider": "GitHub",
+  "git-company": "Michuki",
+  "repository-name": "iCow-App-3"
+}
