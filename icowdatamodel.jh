@@ -1,0 +1,692 @@
+  
+application {
+  config {
+    baseName iCow,
+    applicationType monolith,
+    authenticationType jwt
+    packageName com.gdt.icow,
+    prodDatabaseType postgresql,
+    cacheProvider hazelcast,
+    buildTool maven,
+    clientFramework angular,
+    useSass true,
+    testFrameworks [protractor],
+	nativeLanguage en,
+    languages [en, swa]
+  }
+  entities *
+}
+
+/**
+ * The MobileUse entity.
+ */
+entity MobileUser {
+	/**
+	* The firstname attribute.
+	*/
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    lastName String maxlength(50),
+	firstName String maxlength(50),
+	emailAddress String maxlength(50),
+	gender String,
+	mobileNumber String,
+	birthDate Instant,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+	salary Long,
+	commissionPct Long,
+    province String,
+    county String,
+    location String,
+    userType UserType  
+}
+
+entity MobileHistory {
+	id Integer required,
+	startDate Instant,
+	endDate Instant
+}
+
+entity Subscription {
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    active Boolean,
+    receiveNotifications Boolean,
+    province String,
+    county String,
+    location String,
+    sendingStatus SendingStatus,
+    serviceCategory ServiceCategory
+}
+
+entity SubscriptionHistory{
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+   	subscriptionUser SubscriptionUser,
+    subscriptionType SubscriptionType
+}
+
+enum DeliveryStatus {
+	ABSENT_SUBSCRIBER_PERMANENT,
+	ABSENT_SUBSCRIBER_TEMPORARY,
+	ACCOUNT_NOT_ENABLED_FOR_REST,
+	ACCOUNT_NOT_HTTP,
+	ANTI_SPAM_REJECTION,
+	BAD_CALLBACK_MISSING_PROTOCOL,
+	CALL_BARRED_BY_USER,
+	COMMS_FAILURE,
+	COMMUNICATION_FAILED,
+	DELIVRD,
+	DELIVERED,
+	DELIVERED_TO_NETWORK,
+	DELIVEREDTONETWORK,
+	DELIVERED_TO_TERMINAL,
+	DELIVEREDTOTERMINAL,
+	DELIVERY_IMPOSSIBLE,
+	DELIVERYIMPOSSIBLE,
+	DELIVERY_NOTIFICATION_NOT_SUPPORTED,
+	DELIVERY_UNCERTAIN,
+	DELIVERYUNCERTAIN,
+	DESTINATION_UN_REACHABLE,
+	FACILITY_NOT_ALLOWED,
+	FAILED,
+	GENERAL_ERROR,
+	HANDSET_BUSY,
+	ILLEGAL_NUMBER,
+	INSUFFICIENT_BALANCE,
+	INTERNAL_ERROR,
+	INTERRUPTED,
+	INVALID_CREDENTIALS,
+	INVALID_FROM_ADDRESS,
+	INVALID_LINKID,
+	INVALID_MESSAFE_CLASS,
+	INVALID_MESSAGE,
+	INVALID_MESSAGE_CLASS,
+	INVALID_PARAMS,
+	INVALID_SENDER_ADDRESS,
+	INVALID_SIGNATURE,
+	INVALID_TTL,
+	MESSAGE_TOO_LONG,
+	MESSAGE_WAITING,
+	MISSING_PARAMS,
+	NETWORK_ERROR,
+	NON_WHITE_LISTED_DESTINATION,
+	NOT_SFC_USER,
+	NUMBER_BARRED,
+	NUMBER_BLOCKED_BY_CARRIER, 
+	NUMBER_UNREACHABKE, 
+	PARTNER_ACCOUNT_BARRED, 
+	PARTNER_QUOTA_EXCEEDED, 
+	PENDING_SENDING, 
+	PENDING_CONFIRMATION,
+	PORTABILITY_ERROR,  
+	PRE_PAID_INSUFFICIENT_FUNDS, 
+	QUOTA_EXCEEDED, 
+	STATUS_ACCOUNT_NOT_HTTP, 
+	STATUS_COMMS_FAILURE, 
+	STATUS_FACILITY_NOT_ALLOWED, 
+	STATUS_INTERNAL_ERROR, 
+	STATUS_INVALID_CREDENTIALS, 
+	STATUS_INVALID_FROM_ADDRESS, 
+	STATUS_INVALID_MESSAFE_CLASS, 
+	STATUS_INVALID_MESSAGE, 
+	STATUS_INVALID_PARAMS, 
+	STATUS_INVALID_SIGNATURE, 
+	STATUS_INVALID_TTL,
+	STATUS_MESSAGE_TOO_LONG,
+	STATUS_NUMBER_BARRED,
+	STATUS_NUMBER_UNREACHABKE,
+	STATUS_PARTNER_ACCOUNT_BARRED,
+	STATUS_PARTNER_QUOTA_EXCEEDED,
+	STATUS_THROTTLED,
+	STATUS_TOO_MANY_BINDS,
+	STATUS_TOO_MANY_DESTINATIONS,
+	SUBSCRIBER_AGE_RESTRICTION,
+	SUCCESS,
+	THROTTLED,
+	UNKNOWN,
+	UNROUTABLE,
+	USER_ABNORMAL_STATE,
+	USER_IN_BLACKLIST,
+	USER_IS_SUSPENDED,
+	USER_NOT_EXIST, 
+	USER_NOT_SUBSCRIBED, 
+	UNAUTHORISED, 
+	INVALID_REQUEST
+}
+
+enum AutoresponderType {
+	SUBSCRIBETOSERVICE,
+	CONTAINSWORD,
+	SINGLEWORDNOTCASESENSITIVE,
+	SINGLESPECIFICCASESENSITIVEWORD,
+	INCLUDESWHOLEWORD, 
+    INCLUDESWHOLEWORDCASESENSITIVE, 
+    EXITSYSTEMRESPONSE
+}
+
+enum EthioTelDeliveryStatus {
+	DELIVERED("DELIVERED"),
+	DELIVERD("DELIVERD"),
+	DELIVRD("DELIVRD"),
+	UNDELIV ("UNDELIV"),
+	UNDELIVRD("UNDELIVRD"),
+	EXPIRED("EXPIRED"),
+	ESME_ROK("ESME_ROK"), 
+	ESME_RINVNUMDESTS("ESME_RINVNUMDESTS"), 
+	CREATED("CREATED")
+}
+
+enum FilterAttributeType {
+	DEFAULT,
+	ADDITION,
+	PRICE,
+	QUANTITY
+}
+
+enum MenuType {
+	HOMEMENU,
+	PICKLIST,
+	REGULARMENU,
+	COLLECTFEEDBACK,
+	COLLECTPICKLISTFEEDBACK,
+	COLLECTINFORMATION,
+	COLLECTDATEINFORMATION,
+	CONFIRMATIONMENU,
+	LANGUAGESELECTIONMENU,
+	MENUTHATLINKSTOCOMPLETEMENU,
+	MENULINKTOSMSCATEGORY,
+	MENUTHATLISTSSMSCATEGORYMENUS,
+	MENUOPTIONS,
+	UPDATEMENU,
+	USERLIVESTOCKLIST,
+	LIVESTOCKDETAILSMENU,
+	INPUTSESSIONDETAILS,
+	SEMENSTRAWMENU,
+	EXPERTMENUQUERY,
+	EXPERTSELECTMENULIST,
+	FILTERERRORMENU,
+	MARKETSELLERPRODUCTSLIST,
+	MARKETBUYERAVAILABLESELLERS,
+	MARKETBUYERALERTSOPTIONS,
+	MARKETBUYERSMSSELLERLIST,
+	MARKETBUYERQUERY,
+	MARKETPRODUCT,
+	OPTINMENU,
+	ERRORMENU,
+	SUBSCRIBEMENU,
+	SUBCRIPTIONCONFIRMATIONMENU, 
+	SUBSCRIBEDSERVICESLIST,
+	UNSUBSCRIBEMENU,
+	ENDSESSIONMENU, 
+	MOBILEUSERUPDATE, 
+	LOCATIONSELECTIONMENU, 
+	BRANDADVISORVOTECONFIRMATION, 
+	BRANDADVISORPRODUCTSLIST,
+	BRANDADVISORCHECKPRODUCTCATEGORY,
+	BRANDADVISORVOTESQUERY
+}
+
+enum ProductStatus {
+ ACTIVE,
+ INACTIVE
+}
+
+enum MobileUserType {
+	CONFIRMEDUSER, 
+	/*Users who accept the Optin Menu*/
+	REJECTEDOPTIN, 
+	UNCONFIRMEDUSER, 
+	/*Users who rejected the Optin Menu*/
+	REJECTEDSDPACTIVATION, 
+	/*Users who Rejected the SDP Optin Menu on iCow*/
+	PENDINGSDPACTIVATION, 
+	/*Users who are yet to Optin to the SDP Menu on iCow*/
+	MOBILEUSERSDPDEACTIVATED,
+	EXITEDSDP, 
+	OFFSDP, 
+	/*Users who exit SDP via *100# or *400#*/
+	BLACKLIST, 
+	/*Users who dial and access the menu and accept to optin*/
+	ACTIVE, 
+	/*Users who dial and access the menu but take no action*/
+	DEFAULT, 
+	/*Users who dial and access the menu and reject to optin*/
+	INACTIVE, 
+	NONEXISTENT,
+	/*Users in the iCow Team*/
+	ICOWTEAM,
+	DEV,
+	TESTING, 
+	CANCELLEDSDPACTIVATION
+}
+
+enum ServiceType {
+	SDPACTIVATE,
+	SDPDEACTIVATE,
+	DELIVERY_RECEIPT,
+	ACTIVATION,
+	DEACTIVATION,
+	RENEWAL,
+	PAYMENT,
+	NOTIFY_LINKID,
+	CONTENT_CHARGE,
+	REFUND,
+	DELIVER_RECEIPT,
+	INTERACTIVE_RESPONSE,
+	CONSENT,
+	CP_BLACKLIST,
+	
+	AUTORESPONDER,
+	BROADCASTING,
+	BROADCASTINGPROCESSOR,
+	CALENDARPROCESSOR,
+	BRANDADVISOR,
+	CALENDAR,
+
+	EXPERTSUBSCRIPTION,
+	CALENDARNOTIFICATION,
+	GESTATIONCALENDAR,
+	KIENYEJICALENDAR,
+	BROILERCALENDAR,
+	LAYERCALENDAR,
+	
+	FEEDBACK,
+	SMSLIBRARY,
+	EXPERTDIRECTORY,
+	
+	MARKET,
+	MARKETSELLER,
+	MARKETPRODUCT,
+	MARKETBUYERSEARCH,
+	MARKETBUYERALERTS,
+	MOBILEUSERUPDATE,
+	
+	SDP,
+	SMSSENDING,
+	SMSRESENDING,
+	USERRESPONSE, 
+	MILKRECORD, 
+	PICKLISTBROADCASTING, 
+	PICKLISTCALENDAR, 
+	DEFAULT
+}
+
+entity Livestock {
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    name String,
+    dateOfBirth LocalDate,
+    referenceDate LocalDate,
+    inseminationDate LocalDate   
+}
+
+entity LivestockType {
+	id Integer required,
+    calendarDuration Integer,
+    description String,
+    name String,
+    serviceType ServiceType
+}
+
+entity Translations{
+
+}
+
+entity Sms {
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    message String,
+    orderId Integer,
+    smsType SmsType,
+    translated Boolean,
+    keyword String
+}
+
+entity SmsCategory {
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    categoryName String,
+    description String,
+    smsCount Integer
+}
+
+entity SmsService{
+	id Integer required,
+	version Integer,
+    createdDate LocalDate,
+    modifiedDate LocalDate,
+    name String,
+    serviceType String,
+    serviceCode String,
+    serviceCategory String,
+    sendingStatus SendingStatus,
+    numberOfSMS Integer,
+    orderId Integer,
+    
+}
+
+entity SmsServiceSendingHistory{
+
+}
+
+entity SmsIn {
+
+}
+
+entity SmsOut {
+
+}
+
+entity Menu {
+
+}
+
+entity UssdMenuTransactions {
+
+}
+
+entity UssdMenuSessionData{
+
+}
+
+entity Autoresponder {
+
+}
+
+entity Response {
+
+}
+
+enum SendNotificationStatus {
+	DEFAULT,
+	STARTED,
+	COMPLETEDFAILURE,
+	ENDOFMESSAGES,
+	INTERRUPTEDEXCEPTION,
+	PROCESSED,
+	PROCESSING,
+	PENDINGSEND,
+	SENDING,
+	SKIPPED,
+	INTERRUPTED,
+	COMPLETED, 
+	RESENDING,
+    RESET,
+    IGNORED    
+}
+
+enum SendType {
+	DIRECTENDPOINT,
+	MESSAGEQUEUE,
+	SEND,
+	RESEND
+}
+
+enum ServiceCategory {
+	BULKSMSCLIENT,
+	GENERALUSER,
+	ONDEMANDRESPONSE,
+	AUTOMATEDRESPONSE,
+	BROADCASTINGPROCESSOR,
+	SCHEDULEDNOTIFICATION,
+	DAILYNOTIFICATION,
+	WEEKLYNOTIFICATION,
+	QUERYRESPONSE,
+	STATEUPDATE,
+	GENERAL,
+	USERRESPONSE, 
+	EXPERTSUBSCRIPTION,
+	CALENDARNOTIFICATION,
+	GESTATIONCALENDAR,
+	KIENYEJICALENDAR,
+	BROILERCALENDAR,
+	LAYERCALENDAR,
+	CONTENTCALENDAR,
+	LIVESTOCKCALENDAR,
+	PEOPLECALENDAR,
+	PLANTCALENDAR,
+	RECURSIVECALENDAR,
+	CALENDAR,
+	CALENDARPROCESSOR
+}
+
+enum SMSGateway {
+	SAFARICOM,
+	SAFARICOMBULKSMS,
+	NEXMO, 
+	TZTALIRI, 
+	DIGIFARM, 
+	ETHIOTEL
+}
+
+enum UpdateKey {
+	BRANDADVISORVOTE,
+	BRANDADVISORVOTEQUERY,
+	BRANDADVISORPRODUCT,
+	BRANDADVISORCOUNTY,
+	BRANDADVISORLOCATION,
+	BRANDADVISORPRODUCTCATEGORY,
+	MOBILEUSERFIRSTNAME,
+	MOBILEUSERLASTNAME,
+	MOBILEUSERCOUNTY,
+	MOBILEUSERLOCATION,
+	MOBILEUSERGENDERSELECTION,
+	MOBILEUSERPROVINCE,
+	MOBILEUSERNUMBER,
+	MOBILEUSERDATEOFBIRTH,
+	LIVESTOCKNAME,
+	LIVESTOCKDATEOFBIRTH,
+	LIVESTOCKCALVINGDATE,
+	LIVESTOCKSERVEDATE,
+	BULLNAME,
+	BULLCODE,
+	STRAWCODE,
+	BREED,
+	INSEMINATORID,
+	INSEMINATORNAME,
+	AICODE,
+	AINAME,
+	AILICENSE,
+	BATCHNUMBER,
+	EXPIRYDATE,
+	SEMENSOURCE,
+	PRODUCT,
+	EXPERT,
+	EXPERTLOCATION,
+	DYNAMICPICKLISTPAGE,
+	ERRORMESSAGE,
+	ASKQUESTION,
+	FEEDBACKQUESTION, 
+	MARKETCOUNTY,
+	MARKETREGION,
+	MARKETPRODUCT,
+	MARKETATTRIBUTE,
+	NUMBEROFSMS, 
+	DYNAMICLIST,
+	FARMRECORD, 
+	DYNAMICSUBSCRIBEDSERVICESLIST, 
+	LIVESTOCKINSEMINATORNAME, 
+	LIVESTOCKBULLNAME, 
+	LIVESTOCKSTRAWCODE, 
+	LIVESTOCKEXPIRYDATE,
+	LIVESTOCKBATCHNUMBER, 
+	LIVESTOCKSERVEDATESTRING, 
+	LIVESTOCKNUMBEROFCALVES,
+	
+	CALENDAR,
+	BROADCASTING,
+	CALENDARNOTIFICATION,
+	GESTATIONCALENDAR,
+	KIENYEJICALENDAR,
+	BROILERCALENDAR,
+	LAYERCALENDAR,
+	CONTENTCALENDAR,
+	LIVESTOCKCALENDAR,
+	
+	YEARPICKLIST,
+	MONTHPICKLIST,
+	DAYPICKLIST, 
+	DYNAMICSELLERPRODUCTSLIST,
+	USERINITIALIZATION,
+	VOTEBRAND,
+	CHECKBRAND, 
+	DYNAMICBRANDADVISORPRODUCTSLIST, 
+	DYNAMICBRANDADVISORPRODUCTCATEGORYLIST,
+	DAILYNOTIFICATION,
+	WEEKLYNOTIFICATION,
+	SCHEDULEDNOTIFICATION, 
+	MILKRECORD, 
+	LIVESTOCKID, 
+	LIVESTOCKCOUNTY, 
+	LIVESTOCKPROVINCE, 
+	LIVESTOCKSUBCOUNTY, 
+	LIVESTOCKWARD, 
+	CALENDARPICKLIST, 
+	HARVESTDATE
+}
+
+enum SafaricomDeliveryStatus {
+	DELIVERED("DELIVERED"),
+	DELIVERD("DELIVERD"),
+	DELIVRD("DELIVRD"),
+	UNDELIV ("UNDELIV"),
+	UNDELIVRD("UNDELIVRD"),
+	EXPIRED("EXPIRED"),
+	ESME_ROK("ESME_ROK"),
+	INVALID_MESSAGE("INVALID_MESSAGE"),
+	ESME_RINVNUMDESTS("ESME_RINVNUMDESTS"), 
+	CREATED("CREATED"), 
+	SENT("SENT")
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+entity Department {
+	departmentName String required
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Task {
+	title String,
+	description String
+}
+
+entity FilterAttribute{
+
+}
+
+entity Gateway{
+
+}
+
+entity Shortcode {
+	name String,
+	ussdShortcode String,
+	maxSalary Long
+}
+
+enum Language {
+    TZSWAHILI, KISWAHILI, ENGLISH, SPANISH
+}
+
+enum UserType {
+ 	ACTIVE, 
+	/*Users who dial and access the menu but take no action*/
+	DEFAULT, 
+	/*Users who dial and access the menu and reject to optin*/
+	CONFIRMEDUSER, 
+	/*Users who accept the Optin Menu*/
+	REJECTEDOPTIN, 
+	UNCONFIRMEDUSER, 
+	/*Users who rejected the Optin Menu*/
+	REJECTEDSDPACTIVATION, 
+	/*Users who Rejected the SDP Optin Menu on iCow*/
+	PENDINGSDPACTIVATION, 
+	/*Users who are yet to Optin to the SDP Menu on iCow*/
+	EXITEDSDP, 
+	OFFSDP, 
+	/*Users who exit SDP via *100# or *400#*/
+	BLACKLIST, 
+	/*Users who dial and access the menu and accept to optin*/
+	INACTIVE, 
+	NONEXISTENT,
+	/*Users in the iCow Team*/
+	ICOWTEAM,
+	DEV,
+	TESTING, 
+	CANCELLEDSDPACTIVATION
+}
+
+relationship OneToOne {
+	Country{region} to Region
+}
+
+relationship OneToOne {
+	Location{country} to Country
+}
+
+relationship OneToOne {
+	Department{location} to Location
+}
+
+relationship ManyToMany {
+	Job{task(title)} to Task{job}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	MobileUser to Job{employee},
+	/**
+	* A relationship
+	*/
+	Department to
+	/**
+	* Another side of the same relationship
+	*/
+	MobileUser{department}
+    MobileUser to MobileHistory{employee}  
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	JobHistory{job} to Job,
+	JobHistory{department} to Department,
+	
+}
+
+// Set pagination options
+paginate JobHistory, MobileUser with infinite-scroll
+paginate Job with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except MobileUser, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
